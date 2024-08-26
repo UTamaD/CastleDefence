@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56dd894a4cf65eb43a196631290ac655, type: 3}
+  m_Name: SkillInfo2
+  m_EditorClassIdentifier: 
+  SkillName: PriMagic
+  AttackDistance: 100
+  Cooltime: 2.5
+  AnimationName: Attack04
+  Damage: 50
+  DebuffDuration: 0
+  ProjectilePrefab: {fileID: 100008, guid: 3175c49c9da8d4345b2732869cb4c052, type: 3}
+  AreaOfEffectPrefab: {fileID: 7957833072274404953, guid: 554aade90a6f33d40a68a0b29cdbfd79, type: 3}
+  AreaOfEffectDuration: 10
+  AreaOfEffectRadius: 5
+  AreaOfEffectDamage: 0
+  AreaOfEffectDamageInterval: 1
