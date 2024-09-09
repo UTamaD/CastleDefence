@@ -24,3 +24,5 @@ MonoBehaviour:
   AreaOfEffectRadius: 5
   AreaOfEffectDamage: 10
   AreaOfEffectDamageInterval: 1
+  DamageType: fire
+  sfx_name: fire
