@@ -14,7 +14,13 @@ public class MyPlayerController : SceneSingleton<MyPlayerController>
     
     private int currentPhase = 1;
 
-    public int Gold = 0;
+    [SerializeField] private int gold = 1000;
+    
+    public int Gold
+    {
+        get { return gold; }
+        private set { gold = Mathf.Max(value, 0); }
+    }
     
     
     [SerializeField] private int maxMonsters = 20;
@@ -45,7 +51,11 @@ public class MyPlayerController : SceneSingleton<MyPlayerController>
         
         if (aliveMonsters > maxMonsters)
         {
-            GameManager.Instance.GameOver();
+            if (!GameManager.Instance.isGameOver)
+            {
+                GameManager.Instance.GameOver();
+            }
+            
         }
     }
     public List<GameObject> GetMonsterList()
@@ -83,5 +93,19 @@ public class MyPlayerController : SceneSingleton<MyPlayerController>
         GameObject instance = Instantiate(prefab, position, rotation);
         MonsterInstances.Add(instance.GetInstanceID(), instance);
         return instance;
+    }
+    
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+    }
+
+    public void SpendGold(int amount)
+    {
+        if (Gold >= amount)
+        {
+            Gold -= amount;
+        }
+
     }
 }

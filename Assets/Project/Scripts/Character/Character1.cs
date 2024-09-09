@@ -10,8 +10,9 @@ public class Character1 : CharacterBase<FSM_Character1>
     //public Vector3 Destination;
 
     public int level = 0;
-    
 
+
+    public GameObject towerModel;
     protected override void Awake()
     {
         base.Awake();
@@ -47,11 +48,27 @@ public class Character1 : CharacterBase<FSM_Character1>
         Fsm.ChangeState(FSM_Character1State.FSM_Character1State_Skill3);
     }
     
-    /*
-    public void SetDestination(Vector3 destination)
+    public void UpgradeMaterial()
     {
-        //Destination = destination;
-        Fsm.ChangeState(FSM_Character1State.FSM_Character1State_MoveToDestination);
+
+        float newValue = level * 0.1f;
+        newValue = Mathf.Clamp(newValue, 0, 1.0f);
+
+        Material material = towerModel.gameObject.GetComponent<Renderer>().material;
+        material.SetFloat("_Smoothness", newValue);
+        material.SetFloat("_Metallic", newValue);
+        
+        Color outerChlothesColor = material.GetColor("_OuterChlothes");
+        float newColorValue = Mathf.Lerp(255f, 105f, level / 10f) / 255f;
+        
+        if (outerChlothesColor.r > 0) outerChlothesColor.r = newColorValue;
+        if (outerChlothesColor.g > 0) outerChlothesColor.g = newColorValue;
+        if (outerChlothesColor.b > 0) outerChlothesColor.b = newColorValue;
+        
+        material.SetColor("_OuterChlothes", outerChlothesColor);
+        
     }
-    */
+    
+    
+    
 }

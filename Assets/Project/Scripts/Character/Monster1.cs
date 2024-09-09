@@ -248,20 +248,22 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		
 		animator.SetTrigger("Die");
 		
+		
 		SoundManager.Instance.PlaySFX(deathSoundName);
 
 		// 사망 애니메이션 길이만큼 대기
-		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-		isFullyDead = true;
-        
+		float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+		//Debug.Log($"Waiting for death animation to finish. Animation length: {animationLength}");
+		yield return new WaitForSeconds(animationLength);
+		
 		// 몬스터 제거 직전 처리
 		MyPlayerController.Instance.RemoveMonster(gameObject);
 
 		// 골드 증가 및 킬 증가
-		MyPlayerController.Instance.Gold += goldIncrease + UpgradeManager.Instance.GetExtraGold();
+		MyPlayerController.Instance.AddGold(goldIncrease + UpgradeManager.Instance.GetExtraGold());
 		UpgradeManager.Instance.IncrementKillCount();
 
+		Debug.Log(MyPlayerController.Instance.Gold);
 		// 몬스터 제거
 		Destroy(gameObject);
 	}

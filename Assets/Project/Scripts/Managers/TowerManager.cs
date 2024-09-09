@@ -31,7 +31,7 @@ public class TowerManager : SceneSingleton<TowerManager>
         SoundManager.Instance.PlaySFX(PlaceSfxName);   
         if (MyPlayerController.Instance.Gold >= TowerValue && selectedTowerPrefab != null && !placedTowers.ContainsKey(gridFloor))
         {
-            MyPlayerController.Instance.Gold -= TowerValue;
+            MyPlayerController.Instance.SpendGold(TowerValue);
             Vector3 position = gridFloor.transform.position + Vector3.up * 0.5f;
             GameObject towerInstance = Instantiate(selectedTowerPrefab, position, Quaternion.identity);
             Character1 tower = towerInstance.GetComponent<Character1>();
@@ -60,13 +60,14 @@ public class TowerManager : SceneSingleton<TowerManager>
             
             if (MyPlayerController.Instance.Gold >= upgradeValue + tower.level)
             {
-                MyPlayerController.Instance.Gold -= upgradeValue + tower.level;
+                MyPlayerController.Instance.SpendGold(upgradeValue + tower.level);
                 if ((Random.Range(0, 1.0f) > 0.5f))
                 {
                     UIManager.Instance.ShowMessage(SuccessSfxName);
                     SoundManager.Instance.PlaySFX(SuccessSfxName);
                     Debug.Log("upgrade Sucess");
                     tower.level++;
+                    tower.UpgradeMaterial();
 
                     foreach (var skillInstance in tower.skillInstances)
                     {

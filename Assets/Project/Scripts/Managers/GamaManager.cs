@@ -1,21 +1,33 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SceneSingleton<GameManager>
 {
-    private const string TITLE_SCENE_NAME = "Title"; 
+    private const string TITLE_SCENE_NAME = "Title";
+
+    public bool isGameOver = false;
+
+
+    public void Start()
+    {
+        isGameOver = false;
+    }
 
     public void GameOver()
     {
+        isGameOver = true;
         UIManager.Instance.ShowGameOverPanel();
-        SoundManager.Instance.PlaySFX("GameOver"); 
+        SoundManager.Instance.PlaySFX("GameOver");
+        SoundManager.Instance.PlayMusic(SoundManager.Instance.gameOverMusic);
     }
 
     public void RestartGame()
     {
         Debug.Log("Restarting game");
         UIManager.Instance.HideGameOverPanel();
+        isGameOver = false;
         Time.timeScale = 1f;
         StopAllCoroutines();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -56,7 +56,7 @@ public class PhaseBoss_Running : VMyState<PhaseState>
         if (!isSpawn)
         {
             
-            OwnerStateMachine.ChangeState(PhaseState.Phase3_Ready);
+            OwnerStateMachine.ChangeState(PhaseState.Phase1_Ready);
         }
         
     }

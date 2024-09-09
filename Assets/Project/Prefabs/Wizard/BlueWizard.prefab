@@ -182,7 +182,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c33a548d6df8c8a4daca736f3300dd9c, type: 2}
+  - {fileID: 2100000, guid: 7a4acfe3e6075224c849d308f7e6bdcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2437,8 +2437,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c832f698cc4b42b4f925f42b0970ec4f, type: 2}
   skillInstances: []
   activeSkillInstance: {fileID: 0}
-  Destination: {x: 0, y: 0, z: 0}
   level: 0
+  towerModel: {fileID: 642639286704929208}
 --- !u!114 &2407817023821273687
 MonoBehaviour:
   m_ObjectHideFlags: 0

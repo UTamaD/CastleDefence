@@ -284,12 +284,14 @@ public class UIManager : SceneSingleton<UIManager>
         {
             Time.timeScale = 2f;
             isSpeedNormal = !isSpeedNormal;
+            SoundManager.Instance.PlaySFX("Place");
             UpdateButtonImage();
         }
         else if(Time.timeScale != 0f)
         {
             Time.timeScale = 1f;
             isSpeedNormal = !isSpeedNormal;
+            SoundManager.Instance.PlaySFX("Place");
             UpdateButtonImage();
         }
         

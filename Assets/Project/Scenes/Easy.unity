@@ -1035,6 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e076e8e6c15acd84bb94499440c29866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
 --- !u!4 &492970348
 Transform:
   m_ObjectHideFlags: 0
@@ -4317,6 +4318,7 @@ MonoBehaviour:
   musicSource: {fileID: 978351929}
   sfxSource: {fileID: 2070131199}
   backgroundMusic: {fileID: 8300000, guid: ce83892906df9e64f97cc60f2da1e1db, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: 443eba31af900314fae4953efcaf1aed, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 4dcaf38a7fa7e9e488a4099ad23cbe8d, type: 3}
   - {fileID: 8300000, guid: 0fa54150a05cfa94793ca11e428943de, type: 3}
@@ -4336,6 +4338,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4d31e66022bafc049a47d8733f996647, type: 3}
   - {fileID: 8300000, guid: 25cc4c07dda4de546ad183796c9088fb, type: 3}
   - {fileID: 8300000, guid: d6b2a7de120627b4385c957d515718f2, type: 3}
+  - {fileID: 8300000, guid: 28a748b9f8f733d4e8601345022854df, type: 3}
 --- !u!4 &2083295969
 Transform:
   m_ObjectHideFlags: 0
@@ -8946,6 +8949,7 @@ GameObject:
   - component: {fileID: 6125199725238431572}
   - component: {fileID: 1375056588757251904}
   - component: {fileID: 1424863391122710991}
+  - component: {fileID: 7371121737720312987}
   m_Layer: 5
   m_Name: SpeedBtn
   m_TagString: Untagged
@@ -9272,6 +9276,19 @@ RectTransform:
   m_AnchoredPosition: {x: -75, y: 75}
   m_SizeDelta: {x: 293, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7371121737720312987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112679957920616439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25116022a49bcf4da6e9b17d77d3f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName: ButtonMouseOver
 --- !u!224 &7414215913675601813
 RectTransform:
   m_ObjectHideFlags: 0

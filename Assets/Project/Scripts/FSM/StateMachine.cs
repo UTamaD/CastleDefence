@@ -55,7 +55,7 @@ public abstract class VMyState<T> : VMyStateBase, IVMyState where T : Enum
 
     public void EnterStateWrapper()
     {
-        Debug.Log($"Entering state: {StateEnum}");
+        //Debug.Log($"Entering state: {StateEnum}");
         EnterState();
     }
 
@@ -76,7 +76,7 @@ public abstract class VMyState<T> : VMyStateBase, IVMyState where T : Enum
 
     public void ExitStateWrapper()
     {
-        Debug.Log($"Exiting state: {StateEnum}");
+        //Debug.Log($"Exiting state: {StateEnum}");
         ExitState();
         if (HSFM_StateMachine)
         {

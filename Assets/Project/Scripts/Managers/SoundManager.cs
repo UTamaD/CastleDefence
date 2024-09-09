@@ -11,6 +11,7 @@ public class SoundManager : SceneSingleton<SoundManager>
 
     [Header("Audio Clips")]
     public AudioClip backgroundMusic;
+    public AudioClip gameOverMusic;
     public List<AudioClip> sfxClips;
     
     private Dictionary<string, AudioClip> sfxDictionary;
@@ -37,6 +38,7 @@ public class SoundManager : SceneSingleton<SoundManager>
         musicSource.Play();
     }
 
+    
     public void PlaySFX(string clipName)
     {
         if (sfxDictionary.TryGetValue(clipName, out AudioClip clip))
