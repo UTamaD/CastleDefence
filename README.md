@@ -42,6 +42,5 @@ Unity를 활용한 3D 디펜스 게임입니다.
 - 증강은 모든 타워의 대미지를 올리거나, 골드 획득량을 늘리거나, 모든 적의 속도를 늘리는 등의 효과가 있음
 
 ## 🎥 시연 영상
-[![프로젝트 시연](https://img.youtube.com/vi/5GRvzGUcDbg /0.jpg)](https://youtu.be/5GRvzGUcDbg )
-
+[![프로젝트 시연](https://img.youtube.com/vi/5GRvzGUcDbg/0.jpg)](https://youtu.be/5GRvzGUcDbg)
 
