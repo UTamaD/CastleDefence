@@ -8,11 +8,20 @@ public class PhaseStateMachine : StateMachine<PhaseState>
 {
     
 
+    /// <summary>
+    /// 씬이 로드될 때 호출되는 이벤트 함수
+    /// </summary>
+    /// <param name="scene">로드된 씬</param>
+    /// <param name="mode">씬 로드 모드</param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene loaded, initializing PhaseStateMachine");
         InitializeStateMachine();
     }
+
+    /// <summary>
+    /// 상태 머신을 초기화하는 함수
+    /// </summary>
     public void InitializeStateMachine()
     {
         Debug.Log("Initializing PhaseStateMachine");
@@ -32,6 +41,10 @@ public class PhaseStateMachine : StateMachine<PhaseState>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
+    /// <summary>
+    /// 새로운 상태로 변경하는 함수
+    /// </summary>
+    /// <param name="newState">변경할 새 상태</param>
     public new void ChangeState(PhaseState newState)
     {
  
@@ -51,6 +64,9 @@ public class PhaseStateMachine : StateMachine<PhaseState>
         CheckPhaseChange();
     }
 
+    /// <summary>
+    /// 페이즈 변경 조건을 체크하는 함수
+    /// </summary>
     private void CheckPhaseChange()
     {
         
@@ -66,6 +82,9 @@ public class PhaseStateMachine : StateMachine<PhaseState>
         }
     }
 
+    /// <summary>
+    /// 다음 페이즈로 전환하는 함수
+    /// </summary>
     private void SwitchToNextPhase()
     {
         switch (PhaseManager.Instance.CurrentPhase)

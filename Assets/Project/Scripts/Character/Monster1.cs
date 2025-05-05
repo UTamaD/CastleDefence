@@ -58,6 +58,10 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 
 	public int goldIncrease = 5;
 
+	/// <summary>
+	/// 몬스터의 스턴 또는 사망 상태 여부를 확인하는 함수
+	/// </summary>
+	/// <returns>스턴 또는 사망 상태면 true, 아니면 false</returns>
 	public bool IsDeadOrStun()
 	{
 		return (isStunned || isDying);
@@ -116,18 +120,28 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 	}
 
 
-    
+    /// <summary>
+    /// 몬스터에게 스턴 상태를 적용하는 함수
+    /// </summary>
 	public void OnStun()
 	{
 		Fsm.OnNotify(Monster1Notify.Stun, new StunData());
 	}
 	
+	/// <summary>
+	/// 몬스터의 스턴 상태가 종료될 때 호출되는 함수
+	/// </summary>
 	public void OnStunFInish()
 	{
 		Fsm.ChangeState(FSM_Monster1State.FSM_Monster1_LoopingMove);
 	}
 	
 	
+	/// <summary>
+	/// 몬스터를 목적지로 이동시키는 함수
+	/// </summary>
+	/// <param name="destination">이동할 목적지 위치</param>
+	/// <returns>목적지 도착 여부 (도착: true, 이동 중: false)</returns>
 	public bool MoveToDestination(Vector3 destination)
 	{
 		if (isStunned) return false;
@@ -145,6 +159,12 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		
 		return false;
 	}
+
+	/// <summary>
+	/// 데미지 타입에 따라 적절한 효과를 반환하는 함수
+	/// </summary>
+	/// <param name="damageType">데미지 타입 (fire, ice, lightning)</param>
+	/// <returns>해당 데미지 타입에 맞는 효과</returns>
 	private DamageTypeEffect GetDamageTypeEffect(string damageType)
 	{
 		switch (damageType.ToLower())
@@ -157,37 +177,42 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 				return lightningEffect;
 			default:
 				Debug.LogWarning($"Unknown damage type: {damageType}. Using default effect.");
-				return fireEffect; // 기본값으로 fire 효과 사용
+				return fireEffect;
 		}
 	}
+
+	/// <summary>
+	/// 몬스터가 데미지를 받는 함수
+	/// </summary>
+	/// <param name="damage">받을 데미지 양</param>
+	/// <param name="damageType">데미지 타입</param>
 	public void TakeDamage(float damage, string damageType)
 	{
 		if (isDying) return;
 
 		CurrentHealth -= damage;
 
-		// 피격 애니메이션 재생
 		animator.SetTrigger("Hit");
 
-		// 피해 타입에 따른 이펙트 및 사운드 재생
 		DamageTypeEffect effect = GetDamageTypeEffect(damageType);
 
-		// 피격 이펙트 생성
 		if (effect.effectPrefab != null)
 		{
 			Instantiate(effect.effectPrefab, transform.position, Quaternion.identity);
 		}
 
-		// 피격 사운드 재생
 		SoundManager.Instance.PlaySFX(effect.soundName);
 
-		// 체력이 0 이하가 되면 사망 처리
 		if (CurrentHealth <= 0)
 		{
 			StartCoroutine(Die());
 		}
 	}
 	
+	/// <summary>
+	/// 몬스터에게 이동 속도 감소 디버프를 적용하는 함수
+	/// </summary>
+	/// <param name="duration">디버프 지속 시간</param>
 	public void ApplySlowDebuff(float duration)
 	{
 		if (slowDebuff == null)
@@ -203,6 +228,9 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		UpdateMovementSpeed();
 	}
 	
+	/// <summary>
+	/// 디버프에 따라 몬스터의 이동 속도를 갱신하는 함수
+	/// </summary>
 	private void UpdateMovementSpeed()
 	{
 		if (slowDebuff != null)
@@ -222,6 +250,10 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		}
 	}
 	
+	/// <summary>
+	/// 몬스터에게 스턴 효과를 적용하는 함수
+	/// </summary>
+	/// <param name="duration">스턴 지속 시간</param>
 	private void ApplyStun(float duration)
 	{
 		isStunned = true;
@@ -232,7 +264,10 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		animator.speed = 0;
 	}
 
-	
+	/// <summary>
+	/// 디버프 시각 효과를 표시하는 함수
+	/// </summary>
+	/// <param name="effectPrefab">표시할 이펙트 프리팹</param>
 	private void ShowDebuffEffect(GameObject effectPrefab)
 	{
 		if (currentDebuffEffect != null)
@@ -242,37 +277,34 @@ public class Monster1 : CharacterBase<FSM_Monster1>
 		currentDebuffEffect = Instantiate(effectPrefab, transform.position, Quaternion.identity, transform);
 	}
 	
+	/// <summary>
+	/// 몬스터 사망 처리 코루틴
+	/// </summary>
 	private IEnumerator Die()
 	{
 		isDying = true;
 		
 		animator.SetTrigger("Die");
 		
-		
 		SoundManager.Instance.PlaySFX(deathSoundName);
 
-		// 사망 애니메이션 길이만큼 대기
-		float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-		//Debug.Log($"Waiting for death animation to finish. Animation length: {animationLength}");
-		yield return new WaitForSeconds(animationLength);
+		MyPlayerController.Instance.AddGold(goldIncrease);
+
+		_collider.enabled = false;
+
+		isFullyDead = true;
+
+		yield return new WaitForSeconds(1.5f);
 		
-		// 몬스터 제거 직전 처리
-		MyPlayerController.Instance.RemoveMonster(gameObject);
-
-		// 골드 증가 및 킬 증가
-		MyPlayerController.Instance.AddGold(goldIncrease + UpgradeManager.Instance.GetExtraGold());
-		UpgradeManager.Instance.IncrementKillCount();
-
-		Debug.Log(MyPlayerController.Instance.Gold);
-		// 몬스터 제거
 		Destroy(gameObject);
 	}
-
-
+	
+	/// <summary>
+	/// 몬스터가 살아있는지 확인하는 함수
+	/// </summary>
+	/// <returns>몬스터가 살아있으면 true, 죽었으면 false</returns>
 	public bool IsAlive()
 	{
-		return !isDying && !isFullyDead;
+		return !isFullyDead;
 	}
-	
-
 }

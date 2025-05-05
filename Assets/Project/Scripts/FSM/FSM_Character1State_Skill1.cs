@@ -23,6 +23,9 @@ public class FSM_Character1State_Skill1 :  VMyState<FSM_Character1State>
         _rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// 스킬1 상태 진입 시 실행되는 함수
+    /// </summary>
     protected override void EnterState()
     {   
         SoundManager.Instance.PlaySFX(_character1.activeSkillInstance.info.sfx_name);
@@ -40,6 +43,9 @@ public class FSM_Character1State_Skill1 :  VMyState<FSM_Character1State>
     {
     }
 
+    /// <summary>
+    /// 물리 업데이트 시 실행되는 함수로, 타워가 대상을 바라보도록 처리
+    /// </summary>
     protected override void ExcuteState_FixedUpdate()
     {
         base.ExcuteState_FixedUpdate();
@@ -51,6 +57,9 @@ public class FSM_Character1State_Skill1 :  VMyState<FSM_Character1State>
         }
     }
 
+    /// <summary>
+    /// 애니메이션 종료를 확인하고 스킬 효과를 적용하는 코루틴
+    /// </summary>
     IEnumerator AnimationFinishCheck()
     {
         
