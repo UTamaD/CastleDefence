@@ -197,8 +197,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2375a3d29e7a458449b046e3474dc564, type: 2}
   skillInstances: []
   activeSkillInstance: {fileID: 0}
-  Destination: {x: 0, y: 0, z: 0}
   level: 0
+  towerModel: {fileID: 8867268975673244282}
 --- !u!114 &9154196650732190740
 MonoBehaviour:
   m_ObjectHideFlags: 0

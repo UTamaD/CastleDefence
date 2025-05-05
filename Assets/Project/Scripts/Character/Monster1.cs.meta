@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e4abaaf2e02852d4c9888dd45d6c8c69
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Fsm: {instanceID: 0}
+  - slowDebuffEffectPrefab: {fileID: 3744133877081091469, guid: 53e7b8dca57e1184ca00a1f358cb31de, type: 3}
+  - stunEffectPrefab: {fileID: 4932088507883938021, guid: 817314f654ee7b54886b049b5fd30d4d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
